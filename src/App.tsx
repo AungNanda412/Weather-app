@@ -26,7 +26,7 @@ function App() {
   };
 
   return (
-    <div className="w-full h-svh relative bg-[#0b0b0b86] before:content-[''] before:absolute before:w-full before:h-svh before:top-0 before:left-0 before:-z-10 before:bg-[url('./public/sunset.jpg')] before:bg-cover before:bg-center">
+    <div className="w-full h-svh relative bg-[#0b0b0b86] before:content-[''] before:absolute before:w-full before:h-svh before:top-0 before:left-0 before:-z-10 before:bg-[url('/sunset.jpg')] before:bg-cover before:bg-center">
       <div className="max-w-175 h-150 m-auto  relative top-10 flex flex-col justify-between pl-4 max-sm:max-w-125">
         <div className="text-center p-4">
           <input
