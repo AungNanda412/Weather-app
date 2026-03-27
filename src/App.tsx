@@ -4,20 +4,23 @@ import WeatherHeader from "./components/WeatherHeader";
 import "./index.css";
 import axios from "axios";
 import { useState } from "react";
+import { Loader2 } from "lucide-react";
+
+const fetcher = (url: string) => axios.get(url).then(res => res.data);
 
 function App() {
-  const [data, setData] = useState(``);
+  // const [data, setData] = useState(``);
+  const [input, setInput] = useState(``);
   const [location, setLocation] = useState(``);
 
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=51eecac8cdafc754c007cdb06c0be92f`;
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location || "Yangon"}&appid=51eecac8cdafc754c007cdb06c0be92f`;
+
+  const { data, error, isLoading } = useSWR(weatherUrl, fetcher);
 
   const searchLocation = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      axios.get(weatherUrl).then((response) => {
-        setData(response.data);
-        console.log(response.data);
-      });
-      setLocation(``);
+      setLocation(input);
+      console.log(data);
     }
   };
 
@@ -27,14 +30,15 @@ function App() {
         <div className="text-center p-4">
           <input
             type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             onKeyDown={searchLocation}
             placeholder="Enter Location"
-            className="px-4 py-2 border rounded-xl text-xl text-white ::placeholder:text-white bg-[#ffffff34]"
+            className="px-4 py-2 border rounded-xl text-xl text-white ::placeholder:text-white bg-[#ffffff34] w-full"
           />
         </div>
-        <WeatherHeader data={data} />
+        {!error ? (isLoading ? <Loader2 className=" w-full animate-spin text-white items-center flex justify-center" size={80} /> : <WeatherHeader data={data} />) : <p className="text-center text-white text-2xl">Failed to fetch weather data. Please enter the invalid location.</p> }
+        
         <WeatherDetailsSection data={data} />
       </div>
     </div>
