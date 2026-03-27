@@ -14,7 +14,7 @@ function App() {
   const [location, setLocation] = useState(``);
   const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location || "Yangon"}&appid=${apiKey}`;
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location || "Yangon"}&appid=51eecac8cdafc754c007cdb06c0be92f`;
 
   const { data, error, isLoading } = useSWR(weatherUrl, fetcher);
 
