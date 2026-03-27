@@ -12,7 +12,7 @@ function App() {
   // const [data, setData] = useState(``);
   const [input, setInput] = useState(``);
   const [location, setLocation] = useState(``);
-  const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+  // const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
   const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location || "Yangon"}&appid=51eecac8cdafc754c007cdb06c0be92f`;
 
